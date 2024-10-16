@@ -8,7 +8,7 @@ To run this project, you will need the following software installed on your mach
 
 - **PHP** (version 7.4 or higher): To run the server code.
 - **MySQL** or **MariaDB**: To manage the database.
-- **Composer** (optional): To manage dependencies, if the project uses it.
+- **Composer** (optional): To manage test dependencies.
 - **Web Server** (such as Apache or Nginx): To serve the application.
 
 ## Step-by-Step Setup

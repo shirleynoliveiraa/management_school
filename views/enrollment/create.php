@@ -38,8 +38,8 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Matricular</button>
+                <a href="index.php?action=list_enrollments" class="btn btn-secondary">Cancelar</a>
             </form>
-            <a href="index.php?action=list_enrollments" class="btn btn-secondary">Cancelar</a>
         <?php endif; ?>
     </div>
 </body>
