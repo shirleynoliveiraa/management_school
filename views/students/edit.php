@@ -1,3 +1,5 @@
+<?php include 'views/header.php'; ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -45,7 +47,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-            <a href="/" class="btn btn-secondary">Cancelar</a>
+            <a href="/index.php?action=list" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </body>

@@ -1,13 +1,15 @@
 <?php
+require_once 'config/database.php';
 
 class User {
     private $db;
 
+    private $conn;
+
     public function __construct() {
-        // Configuração básica de conexão com MySQL
-        $this->db = new PDO('mysql:host=localhost;dbname=seu_banco', 'seu_usuario', 'sua_senha');
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
+      $database = new Database();
+      $this->conn = $database->getConnection();
+  }
 
     // Método para criar um novo usuário
     public function create($username, $password) {

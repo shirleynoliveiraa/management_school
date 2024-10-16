@@ -3,7 +3,7 @@ require_once 'config/database.php';
 
 class ClassModel {
     private $conn;
-    private $table = "classes"; // Tabela no banco de dados
+    private $table = "classes";
 
     public $id;
     public $name;

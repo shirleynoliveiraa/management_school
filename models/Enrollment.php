@@ -18,19 +18,16 @@ class Enrollment {
         $query = "INSERT INTO " . $this->table . " (student_id, class_id) VALUES (:student_id, :class_id)";
         $stmt = $this->conn->prepare($query);
 
-        // Verifica se já existe uma matrícula
         $stmt->bindParam(':student_id', $this->student_id);
         $stmt->bindParam(':class_id', $this->class_id);
 
-        // Tenta executar a inserção
         try {
             return $stmt->execute();
         } catch (PDOException $e) {
-            // Se já existir matrícula, retorna false
-            if ($e->getCode() == 23000) { // Código de erro para violação de chave única
+            if ($e->getCode() == 23000) {
                 return false; 
             }
-            throw $e; // Re-throw se não for um erro de duplicata
+            throw $e;
         }
     }
 

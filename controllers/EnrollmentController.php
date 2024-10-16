@@ -1,7 +1,7 @@
 <?php
 require_once 'models/Enrollment.php';
-require_once 'models/Student.php'; // Modelo de Aluno
-require_once 'models/Class.php';    // Modelo de Turma
+require_once 'models/Student.php';
+require_once 'models/Class.php';
 
 class EnrollmentController {
   public function enroll() {
@@ -14,20 +14,20 @@ class EnrollmentController {
             header('Location: index.php?action=list_enrollments');
             exit();
         } else {
-            // Mensagem de erro
+            // Error message
             $errorMessage = "Erro ao matricular o aluno. O aluno já está matriculado nesta turma.";
             
-            // Recupera alunos e turmas para preencher o formulário
+            // Retreivind students to fill out the form
             $studentModel = new Student();
             $students = $studentModel->readAll();
 
             $classModel = new ClassModel();
             $classes = $classModel->readAll();
 
-            include 'views/enrollment/create.php'; // Inclui a visão de criação com a mensagem de erro
+            include 'views/enrollment/create.php';
         }
     } else {
-        // Recupera alunos e turmas para preencher o formulário
+        // Retreivind students to fill out the form
         $studentModel = new Student();
         $students = $studentModel->readAll();
 
@@ -37,7 +37,6 @@ class EnrollmentController {
         include 'views/enrollment/create.php';
     }
 }
-
 
     public function list() {
         $enrollmentModel = new Enrollment();

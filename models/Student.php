@@ -23,7 +23,15 @@ class Student {
         $stmt->bindParam(':birth_date', $this->birth_date);
         $stmt->bindParam(':username', $this->username);
 
-        return $stmt->execute();
+        try {
+          return $stmt->execute();
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                return "O username já está em uso. Por favor, escolha outro.";
+            } else {
+                return "Erro ao cadastrar aluno: " . $e->getMessage();
+            }
+        }
     }
 
     public function readAll() {

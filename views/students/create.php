@@ -1,3 +1,5 @@
+<?php include 'views/header.php'; ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -35,7 +37,7 @@
                 <input type="text" class="form-control" id="username" name="username" required>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="index.php" class="btn btn-secondary">Cancelar</a>
+            <a href="index.php?action=list" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 </body>

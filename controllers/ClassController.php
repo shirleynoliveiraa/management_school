@@ -6,10 +6,13 @@ class ClassController {
         $classModel = new ClassModel();
         $limit = 5;
         $offset = ($page - 1) * $limit;
+
+        // Retrieve paginated class records
         $classes = $classModel->readAll($offset, $limit);
         $totalClasses = $classModel->count();
         $totalPages = ceil($totalClasses / $limit);
 
+        // Render the list view with pagination data
         include 'views/classes/list.php';
     }
 
@@ -20,24 +23,18 @@ class ClassController {
             $class->description = $_POST['description'];
             $class->type = $_POST['type'];
 
-            // Validação
+            // Validate input data
             $errors = $this->validateClassData($class);
 
-            if (!empty($errors)) {
-                foreach ($errors as $error) {
-                    echo "<div class='alert alert-danger'>{$error}</div>";
-                }
-                include 'views/classes/create.php'; // Reexibe o formulário com os erros
-                return;
-            }
-
+            // Attempt to create a new class record
             if ($class->create()) {
                 header('Location: index.php?action=list_classes');
-                exit();
+                exit(); // Ensure no further code is executed after redirect
             } else {
                 echo "Erro ao cadastrar a turma.";
             }
         } else {
+            // Render the creation form
             include 'views/classes/create.php';
         }
     }
@@ -48,33 +45,28 @@ class ClassController {
 
         if (!$classData) {
             echo "Turma não encontrada!";
-            return;
+            return; // Stop execution if class not found
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Populate the model with updated data
             $classModel->id = $id;
             $classModel->name = $_POST['name'];
             $classModel->description = $_POST['description'];
             $classModel->type = $_POST['type'];
 
-            // Validação
+            // Validate updated data
             $errors = $this->validateClassData($classModel);
 
-            if (!empty($errors)) {
-                foreach ($errors as $error) {
-                    echo "<div class='alert alert-danger'>{$error}</div>";
-                }
-                include 'views/classes/edit.php'; // Reexibe o formulário com os erros
-                return;
-            }
-
+            // Attempt to update the class record
             if ($classModel->update()) {
                 header('Location: index.php?action=list_classes');
-                exit();
+                exit(); // Ensure no further code is executed after redirect
             } else {
                 echo "Erro ao atualizar a turma.";
             }
         } else {
+            // Render the edit form with the current class data
             include 'views/classes/edit.php';
         }
     }
@@ -83,23 +75,25 @@ class ClassController {
         $class = new ClassModel();
         $class->id = $id;
 
+        // Attempt to delete the class record
         if ($class->delete()) {
             header('Location: index.php?action=list_classes');
+            exit(); // Ensure no further code is executed after redirect
         } else {
             echo "Erro ao excluir a turma.";
         }
     }
 
-    // Método de validação dos dados da turma
+    // Validate class data to ensure consistency and required fields
     private function validateClassData($class) {
         $errors = [];
 
-        // Valida se o nome tem pelo menos 3 caracteres
+        // Ensure the name is at least 3 characters long
         if (strlen($class->name) < 3) {
             $errors[] = "O nome da turma deve ter pelo menos 3 caracteres.";
         }
 
-        // Valida se todos os campos obrigatórios foram preenchidos
+        // Check that all required fields are filled
         if (empty($class->name) || empty($class->description) || empty($class->type)) {
             $errors[] = "Todos os campos são obrigatórios.";
         }

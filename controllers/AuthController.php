@@ -1,37 +1,63 @@
 <?php
-require_once 'models/User.php';
+require_once 'config/database.php'; // Import Database class
 
 class AuthController {
+    private $pdo;
+
+    public function __construct() {
+        // Initialize database connection using the Database class
+        $database = new Database();
+        $this->pdo = $database->getConnection();
+    }
+
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $userModel = new User();
-            $user = $userModel->findByUsername($username);
+            // Query the database for the user with the provided username
+            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username = :username');
+            $stmt->execute(['username' => $username]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            // Verify if the user exists and the password matches
             if ($user && password_verify($password, $user['password'])) {
-                // Usuário autenticado, cria a sessão
-                session_start();
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
+                session_start(); // Ensure session is started
+                $_SESSION['user'] = $user['username']; // Store username in session
 
-                // Redireciona para a lista de students
-                header('Location: index.php?action=list_students');
-                exit();
+                // Redirect to the home page upon successful login
+                header('Location: index.php');
+                exit;
             } else {
-                $error = "Usuário ou senha inválidos.";
-                include 'views/auth/login.php'; // Recarrega a view com o erro
+                // Display error message for invalid credentials
+                echo "<div class='alert alert-danger'>Login ou senha inválidos.</div>";
             }
-        } else {
-            include 'views/auth/login.php'; // Exibe o formulário de login
         }
+
+        // Render the login form
+        $this->renderLoginForm();
     }
 
     public function logout() {
-        session_start();
-        session_destroy(); // Encerra a sessão
-        header('Location: index.php?action=login');
-        exit();
+        // Ensure session is started before attempting to destroy it
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        session_destroy(); // Destroy the session
+
+        // Redirect to the home page after logging out
+        header('Location: index.php?message=logout_success');
+        exit;
+    }
+
+    // Helper method to render the login form
+    private function renderLoginForm() {
+        echo '
+        <form method="POST" action="index.php?action=login">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <button type="submit">Login</button>
+        </form>';
     }
 }
