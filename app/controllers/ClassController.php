@@ -1,5 +1,5 @@
 <?php
-require_once 'models/Class.php';
+require_once '../app/models/Class.php';
 
 class ClassController {
     public function list($page = 1) {
@@ -13,7 +13,7 @@ class ClassController {
         $totalPages = ceil($totalClasses / $limit);
 
         // Render the list view with pagination data
-        include 'views/classes/list.php';
+        include '../app/views/classes/list.php';
     }
 
     public function create() {
@@ -28,14 +28,14 @@ class ClassController {
 
             // Attempt to create a new class record
             if ($class->create()) {
-                header('Location: index.php?action=list_classes');
+                header('Location: /public/index.php?action=list_classes');
                 exit(); // Ensure no further code is executed after redirect
             } else {
                 echo "Erro ao cadastrar a turma.";
             }
         } else {
             // Render the creation form
-            include 'views/classes/create.php';
+            include '../app/views/classes/create.php';
         }
     }
 
@@ -60,14 +60,14 @@ class ClassController {
 
             // Attempt to update the class record
             if ($classModel->update()) {
-                header('Location: index.php?action=list_classes');
+                header('Location: /public/index.php?action=list_classes');
                 exit(); // Ensure no further code is executed after redirect
             } else {
                 echo "Erro ao atualizar a turma.";
             }
         } else {
             // Render the edit form with the current class data
-            include 'views/classes/edit.php';
+            include '../app/views/classes/edit.php';
         }
     }
 
@@ -77,7 +77,7 @@ class ClassController {
 
         // Attempt to delete the class record
         if ($class->delete()) {
-            header('Location: index.php?action=list_classes');
+            header('Location: /public/index.php?action=list_classes');
             exit(); // Ensure no further code is executed after redirect
         } else {
             echo "Erro ao excluir a turma.";

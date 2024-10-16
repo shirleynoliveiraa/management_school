@@ -1,5 +1,5 @@
 <?php
-include 'views/header.php';
+include '../app/views/partials/header.php';
 
   if (isset($_SESSION['error_message'])) {
       echo "<div class='alert alert-danger'>{$_SESSION['error_message']}</div>";
@@ -35,14 +35,14 @@ include 'views/header.php';
 <body>
     <div class="container">
         <h2>Lista de Alunos</h2>
-        <a href="index.php?action=create" class="btn btn-success mb-3">Cadastrar Novo Aluno</a>
+        <a href="/public/index.php?action=create" class="btn btn-success mb-3">Cadastrar Novo Aluno</a>
         <ul class="list-group">
             <?php while ($row = $students->fetch(PDO::FETCH_ASSOC)): ?>
                 <li class="list-group-item">
                     <span><?= htmlspecialchars($row['name']) ?></span>
                     <span>
-                        <a href="index.php?action=edit&id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="index.php?action=delete&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
+                        <a href="/public/index.php?action=edit&id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="/public/index.php?action=delete&id=<?= $row['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir?');">Excluir</a>
                     </span>
                 </li>
             <?php endwhile; ?>

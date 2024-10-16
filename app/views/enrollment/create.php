@@ -1,4 +1,4 @@
-<?php include 'views/header.php'; ?>
+<?php include '../app/views/partials/header.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -16,7 +16,7 @@
             <div class="alert alert-danger" role="alert">
                 <?= htmlspecialchars($errorMessage) ?>
             </div>
-            <a href="index.php?action=list_enrollments" class="btn btn-secondary">Voltar para Lista de Matrículas</a>
+            <a href="/public/index.php?action=list_enrollments" class="btn btn-secondary">Voltar para Lista de Matrículas</a>
         <?php else: ?>
             <form method="POST">
                 <div class="form-group">
@@ -38,7 +38,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Matricular</button>
-                <a href="index.php?action=list_enrollments" class="btn btn-secondary">Cancelar</a>
+                <a href="/public/index.php?action=list_enrollments" class="btn btn-secondary">Cancelar</a>
             </form>
         <?php endif; ?>
     </div>

@@ -1,14 +1,14 @@
 <?php
-require_once 'config/database.php';
+require_once __DIR__ . '/../../config/database.php';
 
-class ClassModel {
+class Student {
     private $conn;
-    private $table = "classes";
+    private $table = "students";
 
     public $id;
     public $name;
-    public $description;
-    public $type;
+    public $birth_date;
+    public $username;
 
     public function __construct() {
         $database = new Database();
@@ -16,21 +16,27 @@ class ClassModel {
     }
 
     public function create() {
-        $query = "INSERT INTO " . $this->table . " (name, description, type) VALUES (:name, :description, :type)";
+        $query = "INSERT INTO " . $this->table . " (name, birth_date, username) VALUES (:name, :birth_date, :username)";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':name', $this->name);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':type', $this->type);
+        $stmt->bindParam(':birth_date', $this->birth_date);
+        $stmt->bindParam(':username', $this->username);
 
-        return $stmt->execute();
+        try {
+          return $stmt->execute();
+        } catch (PDOException $e) {
+            if ($e->getCode() == 23000) {
+                return "O username já está em uso. Por favor, escolha outro.";
+            } else {
+                return "Erro ao cadastrar aluno: " . $e->getMessage();
+            }
+        }
     }
 
-    public function readAll($offset = 0, $limit = 5) {
-        $query = "SELECT * FROM " . $this->table . " ORDER BY name ASC LIMIT :limit OFFSET :offset";
+    public function readAll() {
+        $query = "SELECT * FROM " . $this->table . " ORDER BY name ASC";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt;
@@ -46,12 +52,12 @@ class ClassModel {
     }
 
     public function update() {
-        $query = "UPDATE " . $this->table . " SET name = :name, description = :description, type = :type WHERE id = :id";
+        $query = "UPDATE " . $this->table . " SET name = :name, birth_date = :birth_date, username = :username WHERE id = :id";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':name', $this->name);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':type', $this->type);
+        $stmt->bindParam(':birth_date', $this->birth_date);
+        $stmt->bindParam(':username', $this->username);
         $stmt->bindParam(':id', $this->id);
 
         return $stmt->execute();
@@ -63,12 +69,5 @@ class ClassModel {
         $stmt->bindParam(':id', $this->id);
 
         return $stmt->execute();
-    }
-
-    public function count() {
-        $query = "SELECT COUNT(*) as count FROM " . $this->table;
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
     }
 }

@@ -17,7 +17,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="/public/index.php">
             <i class="fas fa-graduation-cap"></i> School Manager
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -25,14 +25,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.php"><i class="fas fa-home"></i> Início</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?action=list"><i class="fas fa-users"></i> Lista de Alunos</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?action=list_classes"><i class="fas fa-chalkboard"></i> Lista de Turmas</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.php?action=list_enrollments"><i class="fas fa-user-plus"></i> Matrículas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/public/index.php"><i class="fas fa-home"></i> Início</a></li>
+                <li class="nav-item"><a class="nav-link" href="/public/index.php?action=list"><i class="fas fa-users"></i> Lista de Alunos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/public/index.php?action=list_classes"><i class="fas fa-chalkboard"></i> Lista de Turmas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/public/index.php?action=list_enrollments"><i class="fas fa-user-plus"></i> Matrículas</a></li>
                 <?php if (isset($_SESSION['user'])): ?>
-                    <li class="nav-item"><a class="nav-link" href="index.php?action=logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/public/index.php?action=logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 <?php else: ?>
-                    <li class="nav-item"><a class="nav-link" href="index.php?action=login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/public/index.php?action=login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
                 <?php endif; ?>
             </ul>
         </div>

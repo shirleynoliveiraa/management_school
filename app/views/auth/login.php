@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'models/User.php';
+require_once '../app/models/User.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($authenticatedUser && password_verify($password, $authenticatedUser['password'])) {
         $_SESSION['user_id'] = $authenticatedUser['id'];
-        header('Location: index.php?action=list_students');
+        header('Location: /public/index.php?action=list_students');
         exit();
     } else {
         echo "<div class='alert alert-danger'>Login ou senha inválidos.</div>";

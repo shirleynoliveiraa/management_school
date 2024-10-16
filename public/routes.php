@@ -1,8 +1,8 @@
 <?php
-require_once 'controllers/StudentController.php';
-require_once 'controllers/ClassController.php';
-require_once 'controllers/EnrollmentController.php';
-require_once 'controllers/AuthController.php';
+require_once '../app/controllers/StudentController.php';
+require_once '../app/controllers/ClassController.php';
+require_once '../app/controllers/EnrollmentController.php';
+require_once '../app/controllers/AuthController.php';
 
 $studentController = new StudentController();
 $classController = new ClassController();
@@ -19,7 +19,7 @@ $protectedRoutes = [
 ];
 
 if (in_array($action, $protectedRoutes) && !isset($_SESSION['user'])) {
-    header('Location: index.php?action=login');
+    header('Location: /public/index.php?action=login');
     exit;
 }
 
@@ -62,6 +62,6 @@ switch ($action) {
         $enrollmentController->list();
         break;
     default:
-        include './views/home.php';
+        include '../app/views/partials/home.php';
         break;
 }

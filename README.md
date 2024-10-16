@@ -69,7 +69,7 @@ php -S localhost:8000
 - Now you can access the application in your browser. Enter the following URL:
 
 ```
-http://localhost:8000
+http://localhost:8000/public/index.php
 ```
 - You should see the login interface of the system. Use the credentials of the administrator user you inserted earlier to log in.
 

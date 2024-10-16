@@ -1,5 +1,5 @@
 <?php
-require_once 'models/Student.php';
+require_once '../app/models/Student.php';
 
 class StudentController {
     public function list() {
@@ -9,7 +9,7 @@ class StudentController {
 
         $student = new Student();
         $students = $student->readAll();
-        include 'views/students/list.php';
+        include '../app/views/students/list.php';
     }
 
     public function create() {
@@ -27,21 +27,21 @@ class StudentController {
 
             if (!empty($errors)) {
                 $this->displayErrors($errors);
-                include 'views/students/create.php';
+                include '../app/views/students/create.php';
                 return;
             }
 
             if ($student->create() === true) {
-                header('Location: index.php?action=list');
+                header('Location: /public/index.php?action=list');
                 exit();
             } else {
                   session_start();
                   $_SESSION['error_message'] = "O username já está em uso. Por favor, escolha outro.";
-                  header('Location: index.php?action=list');
+                  header('Location: /public/index.php?action=list');
                   exit();
               } 
           } else {
-            include 'views/students/create.php';
+            include '../app/views/students/create.php';
         }
     }
 
@@ -64,18 +64,18 @@ class StudentController {
 
             if (!empty($errors)) {
                 $this->displayErrors($errors);
-                include 'views/students/edit.php';
+                include '../app/views/students/edit.php';
                 return;
             }
 
             if ($studentModel->update()) {
-                header('Location: index.php?action=list');
+                header('Location: /public/index.php?action=list');
                 exit();
             } else {
                 echo "Erro ao atualizar aluno.";
             }
         } else {
-            include 'views/students/edit.php';
+            include '../app/views/students/edit.php';
         }
     }
 
@@ -88,7 +88,7 @@ class StudentController {
         $student->id = $id;
 
         if ($student->delete()) {
-            header('Location: index.php?action=list');
+            header('Location: /public/index.php?action=list');
         } else {
             echo "Erro ao excluir aluno.";
         }

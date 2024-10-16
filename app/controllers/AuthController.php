@@ -1,5 +1,5 @@
 <?php
-require_once 'config/database.php'; // Import Database class
+require_once '../config/database.php'; // Import Database class
 
 class AuthController {
     private $pdo;
@@ -26,7 +26,7 @@ class AuthController {
                 $_SESSION['user'] = $user['username']; // Store username in session
 
                 // Redirect to the home page upon successful login
-                header('Location: index.php');
+                header('Location: /public/index.php');
                 exit;
             } else {
                 // Display error message for invalid credentials
@@ -47,14 +47,14 @@ class AuthController {
         session_destroy(); // Destroy the session
 
         // Redirect to the home page after logging out
-        header('Location: index.php?message=logout_success');
+        header('Location: /public/index.php?message=logout_success');
         exit;
     }
 
     // Helper method to render the login form
     private function renderLoginForm() {
         echo '
-        <form method="POST" action="index.php?action=login">
+        <form method="POST" action="/public/index.php?action=login">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Senha" required>
             <button type="submit">Login</button>

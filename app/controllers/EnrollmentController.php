@@ -1,7 +1,7 @@
 <?php
-require_once 'models/Enrollment.php';
-require_once 'models/Student.php';
-require_once 'models/Class.php';
+require_once '../app/models/Enrollment.php';
+require_once '../app/models/Student.php';
+require_once '../app/models/Class.php';
 
 class EnrollmentController {
   public function enroll() {
@@ -11,7 +11,7 @@ class EnrollmentController {
         $enrollment->class_id = $_POST['class_id'];
 
         if ($enrollment->create()) {
-            header('Location: index.php?action=list_enrollments');
+            header('Location: /public/index.php?action=list_enrollments');
             exit();
         } else {
             // Error message
@@ -24,7 +24,7 @@ class EnrollmentController {
             $classModel = new ClassModel();
             $classes = $classModel->readAll();
 
-            include 'views/enrollment/create.php';
+            include '../app/views/enrollment/create.php';
         }
     } else {
         // Retreivind students to fill out the form
@@ -34,19 +34,19 @@ class EnrollmentController {
         $classModel = new ClassModel();
         $classes = $classModel->readAll();
 
-        include 'views/enrollment/create.php';
+        include '../app/views/enrollment/create.php';
     }
 }
 
     public function list() {
         $enrollmentModel = new Enrollment();
         $enrollments = $enrollmentModel->readAll();
-        include 'views/enrollment/list.php';
+        include '../app/views/enrollment/list.php';
     }
 
     public function studentsInClass($class_id) {
         $enrollmentModel = new Enrollment();
         $students = $enrollmentModel->readStudentsInClass($class_id);
-        include 'views/enrollment/students_in_class.php';
+        include '../app/views/enrollment/students_in_class.php';
     }
 }

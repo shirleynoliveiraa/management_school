@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../models/Student.php';
+require_once __DIR__ . '/../app/models/Student.php';
 require_once __DIR__ . '/../config/database.php';
 
 use PHPUnit\Framework\TestCase;

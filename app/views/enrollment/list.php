@@ -1,4 +1,4 @@
-<?php include 'views/header.php'; ?>
+<?php include '../app/views/partials/header.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -11,7 +11,7 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Lista de Matrículas</h2>
-        <a href="index.php?action=enroll" class="btn btn-success mb-3">Nova Matrícula</a>
+        <a href="/public/index.php?action=enroll" class="btn btn-success mb-3">Nova Matrícula</a>
         <table class="table table-striped">
             <thead>
                 <tr>
