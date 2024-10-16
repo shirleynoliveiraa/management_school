@@ -1,6 +1,6 @@
 # School Management System
 
-Este projeto é uma aplicação Laravel configurada para rodar em um ambiente Docker. Este README fornece instruções para configurar, construir, e executar o projeto em um ambiente local.
+This project is a simple school management system where users can register students and manage classes.
 
 ## Requirements
 
