@@ -23,35 +23,40 @@ git clone https://github.com/shirleynoliveiraa/management_school.git
 cd management_school
 ```
 
+#### 1.1. Install dependencies to run the tests
+```
+npm install
+```
+
 ### 2. Create the Database
 - Open your MySQL client: You can use the terminal, MySQL Workbench, or phpMyAdmin.
-- Make sure your credentials are correct on the config/database.php file
+- Make sure your credentials are correct on the `config/database.php` file
 
 ```
-$host = '127.0.0.1:3307'; // MySQL server address (check if it's correct, MySQL usually runs on port 3306)
+$host = '127.0.0.1:3307'; // MySQL server address (check if it's correct, MySQL usually runs on port 3306 or just localhost)
 $dbname = 'school_management'; // Database name
 $username = 'root'; // MySQL user
 $password = ''; // MySQL password
 ```
 
-- Execute the script contained in the dump.sql file. This script will create the database and the necessary tables.
-- The dump.sql file also contains some initial data for the tables students and classes, it is optional to execute these parts of the script.
+- Execute the script contained in the `dump.sql` file. This script will create the database and the necessary tables.
+- The `dump.sql` file also contains some initial data for the tables students and classes, it is optional to execute these parts of the script.
 
 
 ### 3. Insert a User
 - After creating the database and tables, you need to insert an administrator user.
-- To do this, in your terminal run the insert_user.php script:
+- To do this, in your terminal run the `insert_user.php` script:
 
 ```
 php insert_user.php
 ```
 
-- This script will insert a user with the username admin@admin.com and the password admin into the database.
+- This script will insert a user with the username `admin@admin.com` and the password `admin` into the database.
 
 ### 4. Configure Database Connection
-- Make sure the database connection credentials in your insert_user.php file are correct. Open the insert_user.php file and update the variables as necessary:
+- Make sure the database connection credentials in your `insert_user.php` file are correct. Open the `insert_user.php` file and update the variables as necessary:
 ```
-$host = '127.0.0.1:3307'; // MySQL server address (check if it's correct, MySQL usually runs on port 3306)
+$host = '127.0.0.1:3307'; // MySQL server address (check if it's correct, MySQL usually runs on port 3306 or just localhost)
 $dbname = 'school_management'; // Database name
 $username = 'root'; // MySQL user
 $password = ''; // MySQL password
