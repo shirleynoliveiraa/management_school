@@ -50,4 +50,13 @@ class Enrollment {
         $stmt->execute();
         return $stmt;
     }
+
+    public function deleteEnrollment() {
+      $query = "DELETE FROM " . $this->table . " WHERE student_id = :student_id AND class_id = :class_id";
+      $stmt = $this->conn->prepare($query);
+      $stmt->bindParam(':student_id', $this->student_id);
+      $stmt->bindParam(':class_id', $this->class_id);
+      return $stmt->execute();
+  }
+  
 }

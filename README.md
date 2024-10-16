@@ -6,7 +6,7 @@ This project is a simple school management system where users can register stude
 
 To run this project, you will need the following software installed on your machine:
 
-- **PHP** (version 7.0 or higher): To run the server code.
+- **PHP** (version 7.4 or higher): To run the server code.
 - **MySQL** or **MariaDB**: To manage the database.
 - **Composer** (optional): To manage dependencies, if the project uses it.
 - **Web Server** (such as Apache or Nginx): To serve the application.
@@ -73,8 +73,13 @@ http://localhost:8000
 ```
 - You should see the login interface of the system. Use the credentials of the administrator user you inserted earlier to log in.
 
+### 7. Tests
+- To run the tests, you can run in the terminal:
+```
+./vendor/bin/phpunit tests/
+```
 
-### 7. Features
+### 8. Features
 - **Student Management**: Create, edit, and delete students. List all registered students.
 - **Class Management**: Create, edit, and delete classes offered by the institution. List all registered classes.
 - **User Registration**: Register users with encrypted passwords for authentication. New users can be registered using the `insert_user.php` script.
